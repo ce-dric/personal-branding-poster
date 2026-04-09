@@ -1,0 +1,20 @@
+{
+  "name": "Lena Forsen",
+  "title": "Professional",
+  "summary": "Professional focused on Computer Vision.",
+  "hashtags": [
+    "#Computer",
+    "#Vision",
+    "#Image",
+    "#Processing",
+    "#Benchmark",
+    "#Is",
+    "#Subject",
+    "#Of"
+  ],
+  "input_files": {
+    "photo": "/Users/cedric/Documents/branding/sample_inputs/lenna_test_image.png",
+    "resume_pdf": "/Users/cedric/Documents/branding/sample_inputs/lenna_resume_sample.pdf"
+  },
+  "output_file": "/Users/cedric/Documents/branding/output_lenna_v2/poster.png"
+}

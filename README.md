@@ -60,6 +60,18 @@ Generated files:
 - `output/poster.png`
 - `output/metadata.json`
 
+## Sample
+
+Sample input files:
+
+- Image: `sample_inputs/lenna_test_image.png`
+- Resume: `sample_inputs/lenna_resume_sample.pdf`
+- Output: `sample_output/lenna_poster_sample.png`
+
+| input (+ resume.pdf) | output |
+| -- | -- |
+| ![Lenna input](./sample_inputs/lenna_test_image.png) | ![Lenna output](./sample_output/lenna_poster_sample.png) |
+
 ## API Usage
 
 ```bash

@@ -61,6 +61,18 @@ python scripts/run_branding_poster.py --image /path/to/photo.jpg --resume /path/
 - `output/poster.png`
 - `output/metadata.json`
 
+## 샘플
+
+샘플 입력 파일:
+
+- 이미지: `sample_inputs/lenna_test_image.png`
+- 이력서: `sample_inputs/lenna_resume_sample.pdf`
+- 출력: `sample_output/lenna_poster_sample.png`
+
+| input (+ resume.pdf) | output |
+| -- | -- |
+| ![Lenna input](./sample_inputs/lenna_test_image.png) | ![Lenna output](./sample_output/lenna_poster_sample.png) |
+
 ## API 실행
 
 ```bash
