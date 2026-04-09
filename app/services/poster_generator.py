@@ -98,18 +98,32 @@ class PosterGenerator:
 
     def _draw_text(self, canvas: Image.Image, hashtags: list[str], resume: ResumeData) -> None:
         draw = ImageDraw.Draw(canvas)
-        safe_box = (46, 520, canvas.width - 36, canvas.height - 42)
+        safe_box = (60, 700, canvas.width - 60, canvas.height - 40)
         text = self._arrange_hashtags(hashtags)
 
         font = self._fit_font(draw, text, safe_box)
+        left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=12, align="center")
+        text_x = (canvas.width - (right - left)) // 2
+        text_y = safe_box[1]
+        shadow_offsets = [(4, 4), (3, 3), (2, 2)]
+        for dx, dy in shadow_offsets:
+            draw.multiline_text(
+                (text_x + dx, text_y + dy),
+                text,
+                font=font,
+                fill=(0, 0, 0, 90),
+                spacing=12,
+                align="center",
+            )
         draw.multiline_text(
-            (safe_box[0], safe_box[1]),
+            (text_x, text_y),
             text,
             font=font,
             fill="white",
-            spacing=10,
+            spacing=12,
             stroke_width=1,
             stroke_fill=(255, 255, 255, 50),
+            align="center",
         )
 
         display_name = (resume.english_name or resume.name).upper()
@@ -138,12 +152,12 @@ class PosterGenerator:
     ) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
         max_width = box[2] - box[0]
         max_height = box[3] - box[1]
-        for size in range(120, 48, -4):
+        for size in range(96, 44, -4):
             font = self._load_font(size)
-            left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=10)
+            left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=12, align="center")
             if right - left <= max_width and bottom - top <= max_height:
                 return font
-        return self._load_font(48)
+        return self._load_font(44)
 
     def _load_font(self, size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
         font_candidates = [
