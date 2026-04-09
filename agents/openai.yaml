@@ -1,0 +1,6 @@
+interface:
+  display_name: "Personal Branding Poster"
+  short_description: "Generate branding posters from photo plus resume"
+  default_prompt: "Use $personal-branding-poster to generate a personal branding poster from a portrait photo and PDF resume, then return the poster and metadata in chat."
+policy:
+  allow_implicit_invocation: true

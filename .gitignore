@@ -1,0 +1,11 @@
+.venv/
+.personal-branding-poster-runtime/
+.pytest_cache/
+__pycache__/
+*.pyc
+output/
+output_v2/
+output_v3/
+output_repo/
+sample_resume.pdf
+.deps-installed
