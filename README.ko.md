@@ -4,6 +4,18 @@
 
 사용자가 인물 사진 1장과 PDF 이력서 1개를 업로드하면, 기술 키워드 기반 퍼스널 브랜딩 포스터를 생성하는 Python/FastAPI 프로젝트이자 Codex 스킬 저장소입니다.
 
+## 샘플
+
+샘플 입력 파일:
+
+- 이미지: `sample_inputs/lenna_test_image.png`
+- 이력서: `sample_inputs/lenna_resume_sample.pdf`
+- 출력: `sample_output/lenna_poster_sample.png`
+
+| input (+ resume.pdf) | output |
+| -- | -- |
+| <img src="./sample_inputs/lenna_test_image.png" width="320" alt="Lenna input" /> | <img src="./sample_output/lenna_poster_sample.png" width="320" alt="Lenna output" /> |
+
 ## 주요 기능
 
 - 인물 사진 업로드 검증 (`jpg`, `jpeg`, `png`)
@@ -60,18 +72,6 @@ python scripts/run_branding_poster.py --image /path/to/photo.jpg --resume /path/
 
 - `output/poster.png`
 - `output/metadata.json`
-
-## 샘플
-
-샘플 입력 파일:
-
-- 이미지: `sample_inputs/lenna_test_image.png`
-- 이력서: `sample_inputs/lenna_resume_sample.pdf`
-- 출력: `sample_output/lenna_poster_sample.png`
-
-| input (+ resume.pdf) | output |
-| -- | -- |
-| ![Lenna input](./sample_inputs/lenna_test_image.png) | ![Lenna output](./sample_output/lenna_poster_sample.png) |
 
 ## API 실행
 
