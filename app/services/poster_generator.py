@@ -114,9 +114,7 @@ class PosterGenerator:
 
         display_name = (resume.english_name or resume.name).upper()
         name_font = self._load_font(54)
-        title_font = self._load_font(28)
         draw.text((58, 58), display_name, font=name_font, fill=ImageColor.getrgb("white"))
-        draw.text((60, 110), resume.title, font=title_font, fill=ImageColor.getrgb("#F1F1F5"))
 
     def _arrange_hashtags(self, hashtags: list[str]) -> str:
         rows: list[str] = []

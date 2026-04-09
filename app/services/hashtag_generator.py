@@ -115,7 +115,16 @@ class HashtagGenerator:
             and re.search(r"[A-Za-z]", token)
             and "@" not in token
             and "." not in token
-            and token.lower() not in {"song", "changwoo", "professional", "personalbrand", "profile"}
+            and token.lower() not in {
+                "song",
+                "changwoo",
+                "professional",
+                "personalbrand",
+                "profile",
+                "lena",
+                "forsen",
+                "model",
+            }
         ]
 
     def _to_hashtag(self, token: str) -> str:

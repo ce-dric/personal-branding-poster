@@ -7,5 +7,7 @@ output/
 output_v2/
 output_v3/
 output_repo/
+output_lenna/
+output_lenna_v2/
 sample_resume.pdf
 .deps-installed
