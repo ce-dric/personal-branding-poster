@@ -57,6 +57,12 @@ You can also use the repository-level runner script, which prepares the virtual 
 python scripts/run_branding_poster.py --image /path/to/photo.jpg --resume /path/to/resume.pdf --output-dir output
 ```
 
+For the built-in sample demo:
+
+```bash
+python scripts/run_branding_poster.py --sample --output-dir output
+```
+
 Generated files:
 
 - `output/poster.png`
@@ -90,6 +96,12 @@ Example flow:
 
 ```text
 $personal-branding-poster Create a personal branding poster from this portrait photo and resume PDF.
+```
+
+Sample flow:
+
+```text
+$personal-branding-poster Show me the sample result using the repository demo inputs.
 ```
 
 Codex can run `scripts/run_branding_poster.py` to:

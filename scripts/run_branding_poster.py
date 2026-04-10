@@ -13,8 +13,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Prepare the local environment and generate a branding poster.",
     )
-    parser.add_argument("--image", required=True, help="Path to portrait image")
-    parser.add_argument("--resume", required=True, help="Path to PDF resume")
+    parser.add_argument("--image", help="Path to portrait image")
+    parser.add_argument("--resume", help="Path to PDF resume")
+    parser.add_argument(
+        "--sample",
+        action="store_true",
+        help="Use repository sample inputs automatically",
+    )
     parser.add_argument(
         "--output-dir",
         default="output",
@@ -31,8 +36,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     repo_root = Path(__file__).resolve().parent.parent
-    image_path = Path(args.image).expanduser().resolve()
-    resume_path = Path(args.resume).expanduser().resolve()
+    image_path, resume_path = resolve_inputs(repo_root, args)
     output_dir = Path(args.output_dir).expanduser().resolve()
 
     validate_inputs(image_path, resume_path)
@@ -48,6 +52,20 @@ def main() -> None:
         "metadata": json.loads(metadata_path.read_text(encoding="utf-8")),
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))
+
+
+def resolve_inputs(repo_root: Path, args: argparse.Namespace) -> tuple[Path, Path]:
+    if args.sample:
+        return (
+            (repo_root / "sample_inputs" / "lenna_test_image.png").resolve(),
+            (repo_root / "sample_inputs" / "lenna_resume_sample.pdf").resolve(),
+        )
+    if not args.image or not args.resume:
+        raise SystemExit("Provide --image and --resume, or use --sample.")
+    return (
+        Path(args.image).expanduser().resolve(),
+        Path(args.resume).expanduser().resolve(),
+    )
 
 
 def validate_inputs(image_path: Path, resume_path: Path) -> None:

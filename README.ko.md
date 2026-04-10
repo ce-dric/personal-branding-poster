@@ -58,6 +58,12 @@ python -m app.main --image /path/to/photo.jpg --resume /path/to/resume.pdf --out
 python scripts/run_branding_poster.py --image /path/to/photo.jpg --resume /path/to/resume.pdf --output-dir output
 ```
 
+내장 샘플로 바로 실행하려면:
+
+```bash
+python scripts/run_branding_poster.py --sample --output-dir output
+```
+
 생성 결과:
 
 - `output/poster.png`
@@ -85,6 +91,12 @@ curl -X POST "http://127.0.0.1:8000/poster/generate" \
 
 ```text
 $personal-branding-poster 이 사진과 이력서 PDF로 퍼스널 브랜딩 포스터 만들어줘
+```
+
+샘플 결과 요청 예시:
+
+```text
+$personal-branding-poster 저장소에 포함된 샘플 입력으로 결과를 보여줘
 ```
 
 Codex는 저장소 안의 `scripts/run_branding_poster.py`를 실행해:

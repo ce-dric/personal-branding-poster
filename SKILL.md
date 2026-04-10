@@ -9,6 +9,7 @@ Use this skill when the user wants you to generate a poster from:
 
 - 1 portrait photo (`jpg`, `jpeg`, `png`)
 - 1 resume PDF (`pdf`)
+- or the built-in sample inputs for a demo run
 
 ## Default Behavior
 
@@ -19,6 +20,12 @@ python scripts/run_branding_poster.py \
   --image /path/to/photo.jpg \
   --resume /path/to/resume.pdf \
   --output-dir output
+```
+
+If the user asks for a sample result or demo output, run:
+
+```bash
+python scripts/run_branding_poster.py --sample --output-dir output
 ```
 
 The script should:
@@ -42,4 +49,5 @@ After generation finishes, answer with:
 
 - This repository is both the app and the skill bundle.
 - Prefer `scripts/run_branding_poster.py` for execution so the environment is prepared consistently.
+- If the user asks for a sample poster, prefer `--sample` instead of asking for files.
 - If the user asks for code changes or customization, edit this repository directly rather than creating another copy.
