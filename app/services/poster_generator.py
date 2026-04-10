@@ -25,6 +25,19 @@ class PosterGenerator:
         self.image_processor = image_processor or ImageProcessor()
         self.hashtag_generator = hashtag_generator or HashtagGenerator()
         self.default_colors = ["#D6FF1F", "#FF7A1A"]
+        self.display_font_candidates = [
+            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+            "/System/Library/Fonts/HelveticaNeue.ttc",
+            "/System/Library/Fonts/Supplemental/Helvetica.ttc",
+            "/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf",
+            "/System/Library/Fonts/Supplemental/Impact.ttf",
+            "/System/Library/Fonts/HelveticaNeue.ttc",
+        ]
+        self.name_font_candidates = [
+            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+            "/System/Library/Fonts/HelveticaNeue.ttc",
+            "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+        ]
 
     def generate(
         self,
@@ -101,33 +114,20 @@ class PosterGenerator:
         safe_box = (60, 700, canvas.width - 60, canvas.height - 40)
         text = self._arrange_hashtags(hashtags)
 
-        font = self._fit_font(draw, text, safe_box)
-        left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=12, align="center")
-        text_x = (canvas.width - (right - left)) // 2
+        font = self._fit_font(draw, text, safe_box, role="display")
+        text_x = safe_box[0]
         text_y = safe_box[1]
-        shadow_offsets = [(4, 4), (3, 3), (2, 2)]
-        for dx, dy in shadow_offsets:
-            draw.multiline_text(
-                (text_x + dx, text_y + dy),
-                text,
-                font=font,
-                fill=(0, 0, 0, 90),
-                spacing=12,
-                align="center",
-            )
         draw.multiline_text(
             (text_x, text_y),
             text,
             font=font,
             fill="white",
             spacing=12,
-            stroke_width=1,
-            stroke_fill=(255, 255, 255, 50),
-            align="center",
+            align="left",
         )
 
         display_name = (resume.english_name or resume.name).upper()
-        name_font = self._load_font(54)
+        name_font = self._load_font(54, role="name")
         draw.text((58, 58), display_name, font=name_font, fill=ImageColor.getrgb("white"))
 
     def _arrange_hashtags(self, hashtags: list[str]) -> str:
@@ -149,23 +149,22 @@ class PosterGenerator:
         draw: ImageDraw.ImageDraw,
         text: str,
         box: tuple[int, int, int, int],
+        role: str,
     ) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
         max_width = box[2] - box[0]
         max_height = box[3] - box[1]
         for size in range(96, 44, -4):
-            font = self._load_font(size)
-            left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=12, align="center")
+            font = self._load_font(size, role=role)
+            left, top, right, bottom = draw.multiline_textbbox((0, 0), text, font=font, spacing=12, align="left")
             if right - left <= max_width and bottom - top <= max_height:
                 return font
-        return self._load_font(44)
+        return self._load_font(44, role=role)
 
-    def _load_font(self, size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-        font_candidates = [
-            "/System/Library/Fonts/AppleSDGothicNeo.ttc",
-            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-            "/System/Library/Fonts/Supplemental/Helvetica.ttc",
-            "/Library/Fonts/Arial Bold.ttf",
-        ]
+    def _load_font(self, size: int, role: str = "display") -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+        if role == "name":
+            font_candidates = self.name_font_candidates
+        else:
+            font_candidates = self.display_font_candidates
         for candidate in font_candidates:
             path = Path(candidate)
             if path.exists():
