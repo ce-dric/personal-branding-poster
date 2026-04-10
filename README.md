@@ -1,3 +1,13 @@
+---
+title: Personal Branding Poster Generator
+emoji: "🖼️"
+colorFrom: blue
+colorTo: gray
+sdk: gradio
+app_file: gradio_app.py
+python_version: "3.10"
+---
+
 # Personal Branding Poster Generator
 
 [한국어 README](./README.ko.md)
@@ -16,6 +26,7 @@ A Python/FastAPI project and Codex skill bundle that generates a personal brandi
 - Saves square poster output as PNG
 - Saves generated metadata as JSON
 - Supports FastAPI, CLI, and Codex skill execution
+- Includes a Gradio UI entrypoint for Hugging Face Spaces deployment
 
 ## Project Structure
 
@@ -81,6 +92,42 @@ curl -X POST "http://127.0.0.1:8000/poster/generate" \
   -F "photo=@/path/to/photo.jpg" \
   -F "resume_pdf=@/path/to/resume.pdf"
 ```
+
+## Gradio UI
+
+Run the Gradio app locally:
+
+```bash
+python gradio_app.py
+```
+
+The app reuses the same `BrandingPipeline` as the CLI and FastAPI route, and accepts:
+
+- one portrait image (`jpg`, `jpeg`, `png`)
+- one resume PDF (`pdf`)
+
+It returns:
+
+- generated poster preview
+- extracted summary
+- generated hashtags
+- full metadata JSON
+
+## Deploy To Hugging Face Spaces
+
+This repository is now structured so it can be pushed directly to a Gradio Space. Hugging Face Spaces reads the YAML block at the top of `README.md` and launches [`gradio_app.py`](./gradio_app.py).
+
+Typical flow:
+
+```bash
+git init
+git remote add space https://huggingface.co/spaces/<your-account>/<your-space>
+git add .
+git commit -m "Add Gradio Space app"
+git push space main
+```
+
+If you create the Space in the Hugging Face UI, choose the `Gradio` SDK and then push this repository contents.
 
 ## Tests
 
