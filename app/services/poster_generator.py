@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from PIL import Image, ImageColor, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from app.models.schemas import PosterMetadata, PosterResult, ResumeData
 from app.services.hashtag_generator import HashtagGenerator
@@ -32,11 +32,6 @@ class PosterGenerator:
             "/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf",
             "/System/Library/Fonts/Supplemental/Impact.ttf",
             "/System/Library/Fonts/HelveticaNeue.ttc",
-        ]
-        self.name_font_candidates = [
-            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-            "/System/Library/Fonts/HelveticaNeue.ttc",
-            "/System/Library/Fonts/AppleSDGothicNeo.ttc",
         ]
 
     def generate(
@@ -126,10 +121,6 @@ class PosterGenerator:
             align="left",
         )
 
-        display_name = (resume.english_name or resume.name).upper()
-        name_font = self._load_font(54, role="name")
-        draw.text((58, 58), display_name, font=name_font, fill=ImageColor.getrgb("white"))
-
     def _arrange_hashtags(self, hashtags: list[str]) -> str:
         rows: list[str] = []
         line = ""
@@ -161,10 +152,7 @@ class PosterGenerator:
         return self._load_font(44, role=role)
 
     def _load_font(self, size: int, role: str = "display") -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-        if role == "name":
-            font_candidates = self.name_font_candidates
-        else:
-            font_candidates = self.display_font_candidates
+        font_candidates = self.display_font_candidates
         for candidate in font_candidates:
             path = Path(candidate)
             if path.exists():
