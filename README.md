@@ -4,17 +4,7 @@
 
 A Python/FastAPI project and Codex skill bundle that generates a personal branding poster from one portrait photo and one PDF resume.
 
-## Sample
-
-Sample input files:
-
-- Image: `sample_inputs/lenna_test_image.png`
-- Resume: `sample_inputs/lenna_resume_sample.pdf`
-- Output: `sample_output/lenna_poster_sample.png`
-
-| input (+ resume.pdf) | output |
-| -- | -- |
-| <img src="./sample_inputs/lenna_test_image.png" width="320" alt="Lenna input" /> | <img src="./sample_output/lenna_poster_sample.png" width="320" alt="Lenna output" /> |
+![Overview](./assets/readme-overview.png)
 
 ## Features
 
@@ -107,6 +97,18 @@ Codex can run `scripts/run_branding_poster.py` to:
 - prepare the local environment
 - generate the poster
 - return `poster.png` and `metadata.json`
+
+## Example
+
+Sample input files:
+
+- Image: `sample_inputs/lenna_test_image.png`
+- Resume: `sample_inputs/lenna_resume_sample.pdf`
+- Output: `sample_output/lenna_poster_sample.png`
+
+| input (+ resume.pdf) | output |
+| -- | -- |
+| <img src="./sample_inputs/lenna_test_image.png" width="320" alt="Lenna input" /> | <img src="./sample_output/lenna_poster_sample.png" width="320" alt="Lenna output" /> |
 
 ## Notes
 
