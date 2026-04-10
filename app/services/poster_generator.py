@@ -26,12 +26,20 @@ class PosterGenerator:
         self.hashtag_generator = hashtag_generator or HashtagGenerator()
         self.default_colors = ["#D6FF1F", "#FF7A1A"]
         self.display_font_candidates = [
+            # macOS
             "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
             "/System/Library/Fonts/HelveticaNeue.ttc",
             "/System/Library/Fonts/Supplemental/Helvetica.ttc",
             "/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf",
             "/System/Library/Fonts/Supplemental/Impact.ttf",
-            "/System/Library/Fonts/HelveticaNeue.ttc",
+            # Linux (Ubuntu/Debian — installed via packages.txt on HF Space)
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+            "/usr/share/fonts/dejavu/DejaVuSans-Bold.ttf",
+            # Windows
+            "C:/Windows/Fonts/arialbd.ttf",
+            "C:/Windows/Fonts/impact.ttf",
         ]
 
     def generate(
